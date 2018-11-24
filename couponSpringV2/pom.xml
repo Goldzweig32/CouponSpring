@@ -7,6 +7,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->

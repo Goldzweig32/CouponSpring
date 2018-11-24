@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yaniv.coupons.beans.Company;
@@ -20,13 +22,13 @@ import com.yaniv.coupons.controller.CompanyController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
 @RestController
-@RequestMapping(value = "/companies")
+@RequestMapping("/companies")
 public class CompanyApi {
 	
 	@Autowired
 	private CompanyController companyController;
 		
-	@RequestMapping(value = "/registerCompany", method = RequestMethod.POST)
+	@PostMapping
 	public Response registerCompany(HttpServletResponse response,@RequestBody Company company)throws ApplicationException{
 		long companyId = this.companyController.registerCompany(company);
 		
@@ -38,22 +40,24 @@ public class CompanyApi {
 		
 	}
 	
-	@RequestMapping(value = "/deactivateCompany", method = RequestMethod.DELETE)
-	public void deactivateCompany(@RequestParam("companyId") long companyId) throws ApplicationException{
+	@DeleteMapping
+	
+	public void deactivateCompany(@PathVariable("companyId") long companyId) throws ApplicationException{
 		this.companyController.deactivateCompany(companyId);
 	}
 	
-	@RequestMapping(value = "/updateCompany", method = RequestMethod.PUT)
+	@PutMapping
 	public void updateCompany(@RequestBody Company company) throws ApplicationException{
 		this.companyController.updateCompany(company);
 	}
 	
-	@RequestMapping(value = "/showCompanies", method = RequestMethod.GET)
+	@GetMapping
 	public List<Company> getCompanies() throws ApplicationException{
 		return this.companyController.getCompanies();
 	}
 	
-	@RequestMapping(value = "/showCompany", method = RequestMethod.GET)
+	@GetMapping
+	@RequestMapping("/showCompany/{companyId}")
 	public Company getCompany(@PathVariable ("companyId") long companyId) throws ApplicationException{
 		return this.companyController.getCompany(companyId);
 	}

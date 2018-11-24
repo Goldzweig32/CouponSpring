@@ -5,10 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yaniv.coupons.beans.Coupon;
@@ -18,60 +21,66 @@ import com.yaniv.coupons.exceptions.ApplicationException;
 import com.yaniv.coupons.utils.ProjectUtils;
 
 @RestController
-@RequestMapping(value = "/coupons")
+@RequestMapping("/coupons")
 public class CouponApi {
 	
 	@Autowired
 	private CouponController couponController;
 
-	@RequestMapping(value = "/createCoupon", method = RequestMethod.POST)
+	@PostMapping
 	public void createCoupon(@RequestBody Coupon coupon)throws ApplicationException{
 		this.couponController.createCoupon(coupon);
 	}
 
-	@RequestMapping(value = "/purchaseCoupon/", method = RequestMethod.POST)
-	public void purchaseCoupon(HttpServletRequest request,@RequestParam("couponId") long couponId) throws ApplicationException {
+	@PostMapping
+	@RequestMapping("/purchaseCoupon/{couponId}")
+	public void purchaseCoupon(HttpServletRequest request,@PathVariable("couponId") long couponId) throws ApplicationException {
 		this.couponController.purchaseCoupon(Long.parseLong(ProjectUtils.getCookieValue(request,"login")), couponId);
 	}
 
-
-	@RequestMapping(value = "/deleteCoupon", method = RequestMethod.POST)
-	public void deleteCoupon(@RequestParam ("couponId") long couponId) throws ApplicationException{
+	@DeleteMapping
+	@RequestMapping("/{couponId}")
+	public void deleteCoupon(@PathVariable ("couponId") long couponId) throws ApplicationException{
 		this.couponController.deleteCoupon(couponId);
 	}
 
-	@RequestMapping(value = "/updateCoupon", method = RequestMethod.PUT)
+	@PutMapping
 	public void updateCoupon(@RequestBody Coupon coupon) throws ApplicationException{
 		this.couponController.updateCoupon(coupon);
 	}
 
-	@RequestMapping(value = "/showCoupons", method = RequestMethod.GET)
+	@GetMapping
 	public List<Coupon> getCoupons() throws ApplicationException{
 		return this.couponController.getAllCoupons();
 	}
 
-	@RequestMapping(value = "/showCoupon", method = RequestMethod.GET)
-	public Coupon getCoupon(@RequestParam ("couponId") long couponId) throws ApplicationException {
+	@GetMapping
+	@RequestMapping("/showCoupon/{couponId}")
+	public Coupon getCoupon(@PathVariable("couponId") long couponId) throws ApplicationException {
 		return this.couponController.getCoupon(couponId);
 	}
 
-	@RequestMapping(value = "/showCouponsByType", method = RequestMethod.GET)
-	public List<Coupon> getCouponsByType(@RequestParam ("couponType") CouponType couponType) throws ApplicationException{
+	@GetMapping
+	@RequestMapping("/showCouponsByType/{couponType}")
+	public List<Coupon> getCouponsByType(@PathVariable ("couponType") CouponType couponType) throws ApplicationException{
 		return this.couponController.getCouponsByType(couponType);
 	}
 
-	@RequestMapping(value = "/showCouponsUpToPrice", method = RequestMethod.GET)
-	public List<Coupon> getCouponsUpToPrice(@RequestParam ("price") double price) throws ApplicationException{
+	@GetMapping
+	@RequestMapping("/showCouponsUpToPrice/{price}")
+	public List<Coupon> getCouponsUpToPrice(@PathVariable ("price") double price) throws ApplicationException{
 		return this.couponController.getCouponsUpToPrice(price);
 	}
 
-	@RequestMapping(value = "/showCouponsUpToDate", method = RequestMethod.GET)
-	public List<Coupon> getCouponsUpToDate(@RequestParam ("couponEndDate") String couponEndDate)  throws ApplicationException{
+	@GetMapping
+	@RequestMapping("/showCouponsUpToDate/{couponEndDate}")
+	public List<Coupon> getCouponsUpToDate(@PathVariable ("couponEndDate") String couponEndDate)  throws ApplicationException{
 		return this.couponController.getCouponsUpToDate(couponEndDate);
 	}
 
-	@RequestMapping(value = "/showCouponsByCustomer", method = RequestMethod.GET)	
-	public List<Coupon> getCouponsByCustomerId(@RequestParam ("customerId") long customerId) throws ApplicationException{
+	@GetMapping
+	@RequestMapping("/showCouponsByCustomer/{customerId}")	
+	public List<Coupon> getCouponsByCustomerId(@PathVariable ("customerId") long customerId) throws ApplicationException{
 		return this.couponController.getCouponsByCustomerId(customerId);
 	}
 }

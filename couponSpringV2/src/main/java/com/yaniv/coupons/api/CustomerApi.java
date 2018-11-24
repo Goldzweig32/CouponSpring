@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,15 +21,14 @@ import com.yaniv.coupons.controller.CustomerController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
 
-
 @RestController
-@RequestMapping(value = "/customers")
+@RequestMapping("/customers")
 public class CustomerApi {
 	
 	@Autowired
 	private CustomerController customerController;
 
-	@RequestMapping(value = "/registerCustomer", method = RequestMethod.POST)
+	@PostMapping
 	public Response registerCustomer(HttpServletResponse response,@RequestBody Customer customer)throws ApplicationException{
 		//this.customerController.createCustomer(customer);
 		long customerId = this.customerController.registerCustomer(customer);
@@ -37,24 +39,25 @@ public class CustomerApi {
 		return Response.status(200).entity(new Long(customerId)).build();
 	}
 
-	@RequestMapping(value = "/deleteCustomer", method = RequestMethod.DELETE)
+	@DeleteMapping
+	@RequestMapping("/deleteCustomer")
 	public void deleteCustomer(@RequestParam ("customerId") long customerId) throws ApplicationException{
 		this.customerController.deleteCustomer(customerId);
 	}
 
-	@RequestMapping(value = "/updateCustomer", method = RequestMethod.PUT)
+	@PutMapping	
 	public void updateCustomer(@RequestBody Customer customer) throws ApplicationException {
 		this.customerController.updateCustomer(customer);
 	}
 
-	@RequestMapping(value = "/showCustomers", method = RequestMethod.GET)
+	@GetMapping	
 	public List<Customer> getCustomers() throws ApplicationException{
 		return this.customerController.getCustomers();
 	}
 
-	@RequestMapping(value = "/showCustomer", method = RequestMethod.GET)
+	@GetMapping
+	@RequestMapping("/showCustomer/{customerId}")
 	public Customer getCustomer(@RequestParam("customerId") long customerId) throws ApplicationException{
 		return this.customerController.getCustomerByCustomerId(customerId);
 	}
-
 }

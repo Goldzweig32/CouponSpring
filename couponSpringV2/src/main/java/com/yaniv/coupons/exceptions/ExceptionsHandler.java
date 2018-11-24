@@ -2,11 +2,12 @@ package com.yaniv.coupons.exceptions;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import com.yaniv.coupons.beans.ErrorBeans;
 
-@Provider
+@ControllerAdvice
 public class ExceptionsHandler implements ExceptionMapper<Throwable> {
 
 	@Override

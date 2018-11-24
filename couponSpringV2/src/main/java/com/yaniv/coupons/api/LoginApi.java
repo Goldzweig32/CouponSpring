@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,7 @@ import com.yaniv.coupons.utils.ApplicationContextProvider;
 import com.yaniv.coupons.utils.LoginUtils;
 
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping("/login")
 public class LoginApi {
 	
 	@Autowired
@@ -31,8 +32,8 @@ public class LoginApi {
 	
 	@Autowired 
 	private ICustomerDao customerDao;
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+
+	@PostMapping
 	public Response login(HttpServletRequest request, HttpServletResponse response,@RequestBody UserLoginDetails userLoginDetails) throws ApplicationException {
 		
 		if (LoginUtils.isLoginValid(userLoginDetails)) {
