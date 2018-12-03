@@ -565,5 +565,6 @@ public class CouponDao implements ICouponDao {
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
+		
 	}
 }

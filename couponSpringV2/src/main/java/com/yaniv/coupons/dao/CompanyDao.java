@@ -19,7 +19,7 @@ import com.yaniv.coupons.utils.JdbcUtils;
 @Repository
 public class CompanyDao implements ICompanyDao {
 	
-	final static Logger logger = Logger.getLogger(CompanyDao.class);
+	//final static Logger logger = Logger.getLogger(CompanyDao.class);
 	
 	@Override
 	public long registerCompany(Company company) throws ApplicationException {
@@ -47,14 +47,14 @@ public class CompanyDao implements ICompanyDao {
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
 			resultSet.next();
 			long companyId = resultSet.getLong(1);
-			if (logger.isInfoEnabled()) {
-				logger.info("Company number: " + companyId + " successfully created");
-			}
+		//	if (logger.isInfoEnabled()) {
+			//	logger.info("Company number: " + companyId + " successfully created");
+			//}
 			return companyId;
 		} 
 
 		catch (SQLException e) {
-			logger.error("Create Company Faild!");
+			//logger.error("Create Company Faild!");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, creatCompany(); FAILED");
 		} 
 
@@ -87,7 +87,7 @@ public class CompanyDao implements ICompanyDao {
 		}
 
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, getCompany(); FAILED");
+			//logger.error("Error in CompanyDao, getCompany(); FAILED");
 			throw new ApplicationException(e,ErrorType.SYSTEM_ERROR,"Error in CompanyDao, getCompany(); FAILED");
 		}
 
@@ -131,7 +131,7 @@ public class CompanyDao implements ICompanyDao {
 		} 
 
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, deactivateCompany(); FAILED");
+			//logger.error("Error in CompanyDao, deactivateCompany(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, deactivateCompany(); FAILED");
 		} 
 
@@ -165,14 +165,14 @@ public class CompanyDao implements ICompanyDao {
 			preparedStatement.setLong(5, company.getCompanyId());
 			
 			preparedStatement.executeUpdate();
-			if (logger.isInfoEnabled()) {
-				logger.info("Company number: "+company.getCompanyId() + " successfully updated");
-			}
+			//if (logger.isInfoEnabled()) {
+			//	logger.info("Company number: "+company.getCompanyId() + " successfully updated");
+			//}
 			
 		} 
 
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, updateCompany(); FAILED");
+			//logger.error("Error in CompanyDao, updateCompany(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, updateCompany(); FAILED");
 		} 
 
@@ -210,7 +210,7 @@ public class CompanyDao implements ICompanyDao {
 		} 
 
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, getCompanies(); FAILED");
+			//logger.error("Error in CompanyDao, getCompanies(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, getCompanies(); FAILED");
 		} 
 
@@ -243,13 +243,13 @@ public class CompanyDao implements ICompanyDao {
 			preparedStatement.setString(3, status);
 			
 			resultSet = preparedStatement.executeQuery();
-			
+			System.out.println("what?");
 			if (resultSet.next()) {
 				return resultSet.getLong(1);
 			}
 		}
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, checkLogin(); FAILED");
+			//logger.error("Error in CompanyDao, checkLogin(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, checkLogin(); FAILED");
 		} 
 
@@ -279,14 +279,14 @@ public class CompanyDao implements ICompanyDao {
 			resultSet = preparedStatement.executeQuery();
 			
 			if (resultSet.next()) {
-				if (logger.isInfoEnabled()) {
-					logger.info("Company email:" + companyEmail + "is exist");
-				}
+		//		if (logger.isInfoEnabled()) {
+			//		logger.info("Company email:" + companyEmail + "is exist");
+				//}
 				return true;
 			}
 		}
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, isCompanyExistByEmail(); FAILED");
+			//logger.error("Error in CompanyDao, isCompanyExistByEmail(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, isCompanyExistByEmail(); FAILED");
 		} 
 
@@ -317,14 +317,14 @@ public class CompanyDao implements ICompanyDao {
 			resultSet = preparedStatement.executeQuery();
 		
 			if (resultSet.next()) {
-				if (logger.isInfoEnabled()) {
-					logger.info("Company number: " + companyId + "is exist");
-				}
+				//if (logger.isInfoEnabled()) {
+					//logger.info("Company number: " + companyId + "is exist");
+				//}
 				return true;
 			}
 		}
 		catch (SQLException e) {
-			logger.error("Error in CompanyDao, isCompanyExistById(); FAILED");
+			//logger.error("Error in CompanyDao, isCompanyExistById(); FAILED");
 			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CompanyDao, isCompanyExistById(); FAILED");
 		} 
 

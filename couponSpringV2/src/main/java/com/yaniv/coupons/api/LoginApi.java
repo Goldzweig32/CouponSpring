@@ -34,8 +34,9 @@ public class LoginApi {
 
 	@PostMapping
 	public Response login(HttpServletRequest request, HttpServletResponse response,@RequestBody UserLoginDetails userLoginDetails) throws ApplicationException {
-		
+		System.out.println("wtf1");
 		if (LoginUtils.isLoginValid(userLoginDetails)) {
+			System.out.println("wtf2");
 			// if the user login details was correct, get or create session
 			request.getSession();
 			

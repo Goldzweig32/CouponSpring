@@ -80,7 +80,8 @@ public class CompanyController {
 
 	public void checkLogin(String email, String password) throws ApplicationException{
 		
-		if (!ValidationUtils.isEmailValid(email) || !ValidationUtils.isPasswordValid(password) || companyDao.checkLogin(email, password) == -1) {
+		if (!ValidationUtils.isEmailValid(email) ||  companyDao.checkLogin(email, password) == -1) {
+			System.out.println("wtfwtfwtfwtf");
 			throw new ApplicationException(ErrorType.INVALID_EMAIL_OR_PASSWORD, DateUtils.getCurrentDateAndTime()
 					+" Check login has failed."
 					+"\nThe user attempted to login with invalid email or password.");
