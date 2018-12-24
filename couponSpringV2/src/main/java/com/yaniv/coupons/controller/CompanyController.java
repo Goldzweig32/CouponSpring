@@ -78,14 +78,14 @@ public class CompanyController {
 		return companies;
 	}
 
-	public void checkLogin(String email, String password) throws ApplicationException{
-		
-		if (!ValidationUtils.isEmailValid(email) ||  companyDao.checkLogin(email, password) == -1) {
-			System.out.println("wtfwtfwtfwtf");
+	public long checkLogin(String email, String password) throws ApplicationException{
+		long id = companyDao.checkLogin(email, password);
+		if (id == -1) {
 			throw new ApplicationException(ErrorType.INVALID_EMAIL_OR_PASSWORD, DateUtils.getCurrentDateAndTime()
 					+" Check login has failed."
 					+"\nThe user attempted to login with invalid email or password.");
 		}
+		return id;
 	}
 
 	private void validateRegisterCompany(Company company) throws ApplicationException{

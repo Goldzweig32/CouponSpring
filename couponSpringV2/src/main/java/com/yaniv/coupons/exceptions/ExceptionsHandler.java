@@ -1,32 +1,41 @@
 package com.yaniv.coupons.exceptions;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yaniv.coupons.beans.ErrorBeans;
 
+@ResponseBody
 @ControllerAdvice
-public class ExceptionsHandler implements ExceptionMapper<Throwable> {
-	
+public class ExceptionsHandler {
+
 	@ExceptionHandler(ApplicationException.class)
-	public Response toResponse(ApplicationException applicationException) {
+	public ErrorBeans handleApplicationException(HttpServletResponse response,ApplicationException applicationException) {
 
-			int errorCode = applicationException.getErrorType().getErrorCode();
-			String internalMessage = applicationException.getMessage();
-			String errorMessage = applicationException.getErrorType().getErrorMessage();
-			ErrorBeans errorBeans = new ErrorBeans(errorCode, internalMessage, errorMessage);
-			return Response.status(errorCode).entity(errorBeans).build();
-		
+		int errorCode = applicationException.getErrorType().getErrorCode();
+		String internalMessage = applicationException.getMessage();
+		String errorMessage = applicationException.getErrorType().getErrorMessage();
+		ErrorBeans errorBeans = new ErrorBeans(errorCode, internalMessage, errorMessage);
+
+		response.setStatus(applicationException.getErrorType().getErrorCode());
+		applicationException.printStackTrace();
+		return errorBeans;
+
 	}
-
-	@Override
+	
 	@ExceptionHandler({Exception.class,Error.class})
-	public Response toResponse(Throwable exception) {
+	public ErrorBeans handleException(HttpServletResponse response, Throwable exception) {
+		int errorCode = 601;
 		String internalMessage = exception.getMessage();
 		ErrorBeans errorBeans = new ErrorBeans(601, internalMessage, "General error");
-		return Response.status(601).entity(errorBeans).build();
+
+		response.setStatus(errorCode);
+		exception.printStackTrace();
+		return errorBeans;
 	}
 }

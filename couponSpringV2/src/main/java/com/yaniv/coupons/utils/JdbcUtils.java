@@ -17,7 +17,7 @@ static {
 	}
 
 	public static Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/coupons?autoReconnect=true&useSSL=false&serverTimezone=UTC", "root", "Y1an2iv345");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/coupons?autoReconnect=true&useSSL=false&serverTimezone=UTC", "root", "Yaniv12345");
 		return connection;
 	}
 

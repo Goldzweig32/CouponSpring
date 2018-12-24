@@ -19,6 +19,9 @@ import com.yaniv.coupons.utils.JdbcUtils;
 @Repository
 public class CompanyDao implements ICompanyDao {
 	
+	
+	
+	
 	//final static Logger logger = Logger.getLogger(CompanyDao.class);
 	
 	@Override
@@ -222,7 +225,6 @@ public class CompanyDao implements ICompanyDao {
 	
 	@Override
 	public long checkLogin(String email, String password) throws ApplicationException {
-		System.out.println("8");
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -243,7 +245,6 @@ public class CompanyDao implements ICompanyDao {
 			preparedStatement.setString(3, status);
 			
 			resultSet = preparedStatement.executeQuery();
-			System.out.println("what?");
 			if (resultSet.next()) {
 				return resultSet.getLong(1);
 			}

@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Component;
+ 
+@Component
 public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		System.out.println("get in here!!!!");
 		HttpServletRequest req=(HttpServletRequest) request;
 		HttpServletResponse res=(HttpServletResponse) response;
 		//checking the existence of session. If session exists, then it returns the reference of that session object.

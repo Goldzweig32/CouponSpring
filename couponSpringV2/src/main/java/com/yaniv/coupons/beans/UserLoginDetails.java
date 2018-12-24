@@ -42,6 +42,12 @@ public class UserLoginDetails {
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
+
+	@Override
+	public String toString() {
+		return "UserLoginDetails [userEmail=" + userEmail + ", userPassword=" + userPassword + ", userType=" + userType
+				+ "]";
+	}
 	
 	
 	

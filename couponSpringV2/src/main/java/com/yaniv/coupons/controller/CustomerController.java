@@ -73,14 +73,16 @@ public class CustomerController {
 		
 	}
 	
-	public void checkLogin(String customerEmail, String password) throws ApplicationException {
+	public long checkLogin(String customerEmail, String password) throws ApplicationException {
 		ValidationUtils.isEmailValid(customerEmail);
 		ValidationUtils.isPasswordValid(password);
-		if (customerDao.checkLogin(customerEmail, password) == -1) {
+		long id = customerDao.checkLogin(customerEmail, password);
+		if (id == -1) {
 			throw new ApplicationException(ErrorType.INVALID_EMAIL_OR_PASSWORD, DateUtils.getCurrentDateAndTime()
 					+" Check login has failed."
 					+"\nThe user attempted to login with invalid email or password.");
 		}
+		return id;
 	}
 	
 	private void validateRegisterCustomer(Customer customer) throws ApplicationException{
