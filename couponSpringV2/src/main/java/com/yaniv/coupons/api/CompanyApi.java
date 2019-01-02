@@ -22,7 +22,7 @@ import com.yaniv.coupons.beans.UserId;
 import com.yaniv.coupons.controller.CompanyController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
-@CrossOrigin(origins="http://localhost:4200/")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/companies")
 public class CompanyApi {

@@ -19,7 +19,7 @@ import com.yaniv.coupons.enums.UserType;
 import com.yaniv.coupons.exceptions.ApplicationException;
 import com.yaniv.coupons.utils.ApplicationContextProvider;
 
-@CrossOrigin(origins="http://localhost:4200/")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/login")
 public class LoginApi {
@@ -32,7 +32,6 @@ public class LoginApi {
 
 	@PostMapping
 	public UserId login(HttpServletRequest request, HttpServletResponse response,@RequestBody UserLoginDetails userLoginDetails) throws ApplicationException {
-		System.out.println("baaaa lehaaaaaaa kagiaaa lekannnnnnnnnnnn");
 		//LoginUtils.isLoginValid(userLoginDetails)
 		System.out.println(userLoginDetails.toString());
 		if (userLoginDetails.getUserEmail() != null) {

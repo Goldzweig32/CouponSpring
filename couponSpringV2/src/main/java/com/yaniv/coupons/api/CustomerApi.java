@@ -21,7 +21,7 @@ import com.yaniv.coupons.beans.Customer;
 import com.yaniv.coupons.controller.CustomerController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
-@CrossOrigin(origins="http://localhost:4200/")
+@CrossOrigin(origins="http://localhost:4200")
 @RestController
 @RequestMapping("/customers")
 public class CustomerApi {
