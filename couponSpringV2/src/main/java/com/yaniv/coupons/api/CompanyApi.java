@@ -43,7 +43,6 @@ public class CompanyApi {
 	}
 	
 	@DeleteMapping
-	
 	public void deactivateCompany(@PathVariable("companyId") long companyId) throws ApplicationException{
 		this.companyController.deactivateCompany(companyId);
 	}
