@@ -10,12 +10,12 @@ public class ApplicationException extends Exception {
 		super(message);
 		this.errorType = errorType;
 	}
-	
-	public ApplicationException(Exception excption,ErrorType errorType, String message) {
-		super(message , excption);
+
+	public ApplicationException(Exception excption, ErrorType errorType, String message) {
+		super(message, excption);
 		this.errorType = errorType;
 	}
-	
+
 	public ErrorType getErrorType() {
 		return errorType;
 	}

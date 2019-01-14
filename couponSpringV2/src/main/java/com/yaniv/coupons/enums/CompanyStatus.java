@@ -4,21 +4,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public enum CompanyStatus {
-	ACTIVE("active"),
-	DEACTIVATE("deactivate");
-	
-	private final String companyStatus;       
+	ACTIVE("active"), DEACTIVATE("deactivate");
 
-    private CompanyStatus(String companyStatus) {
-    	this.companyStatus = companyStatus;
-    }
+	private final String companyStatus;
 
-    public boolean equalsName(String otherCouponType) {
-        // (otherName == null) check is not needed because name.equals(null) returns false 
-        return companyStatus.equals(otherCouponType);
-    }
+	private CompanyStatus(String companyStatus) {
+		this.companyStatus = companyStatus;
+	}
 
-    public String toString() {
-       return this.companyStatus;
-    }
+	public boolean equalsName(String otherCouponType) {
+		// (otherName == null) check is not needed because name.equals(null) returns
+		// false
+		return companyStatus.equals(otherCouponType);
+	}
+
+	public String toString() {
+		return this.companyStatus;
+	}
 }

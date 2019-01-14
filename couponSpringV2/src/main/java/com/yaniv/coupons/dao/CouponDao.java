@@ -19,9 +19,9 @@ import com.yaniv.coupons.utils.JdbcUtils;
 
 @Repository
 public class CouponDao implements ICouponDao {
-	
+
 	@Override
-	public long createCoupon(Coupon coupon)  throws ApplicationException {
+	public long createCoupon(Coupon coupon) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -35,7 +35,7 @@ public class CouponDao implements ICouponDao {
 			// ATTACK
 			String sql = "insert into coupon (COUPON_TITLE, START_DATE, END_DATE, AMOUNT, COUPON_TYPE, COUPON_MESSAGE, COUPON_PRICE, COUPON_IMAGE, COMPANY_ID) values (?,?,?,?,?,?,?,?,?)";
 
-			preparedStatement = connection.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
+			preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, coupon.getCouponTitle());
 			preparedStatement.setString(2, coupon.getStartDate());
@@ -46,9 +46,9 @@ public class CouponDao implements ICouponDao {
 			preparedStatement.setLong(7, coupon.getCouponPrice());
 			preparedStatement.setString(8, coupon.getCouponImage());
 			preparedStatement.setLong(9, coupon.getCompanyId());
-			
+
 			preparedStatement.executeUpdate();
-			
+
 			ResultSet resultSet = preparedStatement.getGeneratedKeys();
 			resultSet.next();
 			long couponId = resultSet.getLong(1);
@@ -56,7 +56,7 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, creatCoupon(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, creatCoupon(); FAILED");
 		}
 
 		finally {
@@ -64,6 +64,7 @@ public class CouponDao implements ICouponDao {
 		}
 
 	}
+
 	@Override
 	public Coupon getCoupon(long couponId) throws ApplicationException {
 
@@ -86,7 +87,8 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException(e,ErrorType.SYSTEM_ERROR,"Error in CouponDao, getCouponByCouponId(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, getCouponByCouponId(); FAILED");
 		}
 
 		finally {
@@ -94,9 +96,9 @@ public class CouponDao implements ICouponDao {
 		}
 		return coupon;
 	}
-	
+
 	private Coupon extractCouponFromResultSet(ResultSet resultSet) throws SQLException {
-		
+
 		// Extract coupon's data by parameters from the database
 		Coupon coupon = new Coupon();
 		coupon.setCouponId(resultSet.getLong("ID"));
@@ -112,16 +114,17 @@ public class CouponDao implements ICouponDao {
 
 		return coupon;
 	}
+
 	@Override
 	public void deleteCouponsFromCustomerCouponByCouponId(long couponId) throws ApplicationException {
-		
+
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-		
+
 			// Creating a string which will contain the query
 			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
 			// ATTACK
@@ -134,25 +137,26 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, deleteCouponFromCustomerCouponByCouponId(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, deleteCouponFromCustomerCouponByCouponId(); FAILED");
 		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
-		
+
 	}
 
 	@Override
 	public void deleteCouponsFromCustomerCouponByCustomerId(long customerId) throws ApplicationException {
-		
+
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-		
+
 			// Creating a string which will contain the query
 			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
 			// ATTACK
@@ -165,18 +169,18 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, deleteCouponFromCustomerCouponByCustomerId(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, deleteCouponFromCustomerCouponByCustomerId(); FAILED");
 		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
-		
+
 	}
 
-	
 	@Override
-	public void deleteCoupon(long couponId)  throws ApplicationException  {
+	public void deleteCoupon(long couponId) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -184,9 +188,9 @@ public class CouponDao implements ICouponDao {
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-			
+
 			deleteCouponsFromCustomerCouponByCouponId(couponId);
-			
+
 			// Creating a string which will contain the query
 			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
 			// ATTACK
@@ -198,16 +202,16 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, deleteCoupon(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, deleteCoupon(); FAILED");
 		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
 	}
-	
+
 	@Override
-	public void updateCoupon(Coupon coupon) throws ApplicationException  {
+	public void updateCoupon(Coupon coupon) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -237,7 +241,7 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, updateCoupon(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, updateCoupon(); FAILED");
 		}
 
 		finally {
@@ -245,7 +249,7 @@ public class CouponDao implements ICouponDao {
 		}
 
 	}
-	
+
 	@Override
 	public List<Coupon> getCoupons() throws ApplicationException {
 
@@ -283,6 +287,7 @@ public class CouponDao implements ICouponDao {
 		}
 		return coupons;
 	}
+
 	@Override
 	public List<Coupon> getCouponsByType(CouponType couponType) throws ApplicationException {
 
@@ -321,6 +326,7 @@ public class CouponDao implements ICouponDao {
 		}
 		return coupons;
 	}
+
 	@Override
 	public List<Coupon> getCouponsUpToPrice(double price) throws ApplicationException {
 
@@ -351,7 +357,8 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, getCouponsUpToPrice(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, getCouponsUpToPrice(); FAILED");
 		}
 
 		finally {
@@ -359,14 +366,14 @@ public class CouponDao implements ICouponDao {
 		}
 		return coupons;
 	}
-	
+
 	@Override
-	public List<Coupon> getCouponUpToDate(String couponEndDate)  throws ApplicationException  {
+	public List<Coupon> getCouponUpToDate(String couponEndDate) throws ApplicationException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultSet = null; 
-		Coupon coupon = null; 
+		ResultSet resultSet = null;
+		Coupon coupon = null;
 		List<Coupon> allCouponsByDate = new ArrayList<>();
 
 		try {
@@ -385,7 +392,7 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 e.printStackTrace();
+			e.printStackTrace();
 		}
 
 		finally {
@@ -393,7 +400,7 @@ public class CouponDao implements ICouponDao {
 		}
 		return allCouponsByDate;
 	}
-	
+
 	@Override
 	public List<Coupon> getCouponsByCustomerId(long customerId) throws ApplicationException {
 
@@ -401,110 +408,113 @@ public class CouponDao implements ICouponDao {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		Coupon coupon = null;
-		
+
 		List<Coupon> coupons = new ArrayList<Coupon>();
-		
+
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-			 
+
 			// Creating a string which will contain the query
-			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION ATTACK
+			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
+			// ATTACK
 			String sql = "SELECT ID,COUPON_TITLE,START_DATE,END_DATE,AMOUNT,COUPON_TYPE,COUPON_MESSAGE,COUPON_PRICE,COUPON_IMAGE,COMPANY_ID "
-					+ " FROM coupon c inner"
-					+ " JOIN customer_coupon cc on c.ID = cc.COUPON_ID "
+					+ " FROM coupon c inner" + " JOIN customer_coupon cc on c.ID = cc.COUPON_ID "
 					+ " WHERE cc.CUSTOMER_ID = ? ";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, customerId);
 			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next()) {
+
+			while (resultSet.next()) {
 				coupon = extractCouponFromResultSet(resultSet);
 				coupons.add(coupon);
 			}
-		} 
+		}
 
 		catch (SQLException e) {
-			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, getCouponsByCustomerId(); FAILED");
-		} 
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, getCouponsByCustomerId(); FAILED");
+		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
 		}
 		return coupons;
 	}
-	
+
 	@Override
 	public boolean isCouponExistByTitle(String couponTitle) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-			 
+
 			// Creating a string which will contain the query
-			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION ATTACK
+			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
+			// ATTACK
 			String sql = "SELECT ID FROM coupon WHERE COUPON_TITLE = ? ";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, couponTitle);
 			resultSet = preparedStatement.executeQuery();
-			
+
 			if (resultSet.next()) {
 				return true;
 			}
+		} catch (SQLException e) {
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, isCouponExistByTitle(); FAILED");
 		}
-		catch (SQLException e) {
-			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, isCouponExistByTitle(); FAILED");
-		} 
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public boolean isCouponExist(long couponId) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-			 
+
 			// Creating a string which will contain the query
-			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION ATTACK
+			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
+			// ATTACK
 			String sql = "SELECT ID FROM coupon WHERE ID = ? ";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setLong(1, couponId);
 			resultSet = preparedStatement.executeQuery();
-			
+
 			if (resultSet.next()) {
 				return true;
 			}
+		} catch (SQLException e) {
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, isCouponExistById(); FAILED");
 		}
-		catch (SQLException e) {
-			throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, isCouponExistById(); FAILED");
-		} 
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
 		}
-		
+
 		return false;
 	}
-		
+
 	@Override
-	public void deleteExpiredCoupons()  throws ApplicationException  {
+	public void deleteExpiredCoupons() throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -512,11 +522,12 @@ public class CouponDao implements ICouponDao {
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-			
+
 			// Creating a string which will contain the query
 			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
 			// ATTACK/
-			String sql = "DELETE FROM customer_coupon WHERE COUPON_ID IN (SELECT ID FROM coupon WHERE END_DATE < ?);" + "DELETE FROM coupon WHERE ID IN (SELECT ID FROM coupon WHERE END_DATE < ?";
+			String sql = "DELETE FROM customer_coupon WHERE COUPON_ID IN (SELECT ID FROM coupon WHERE END_DATE < ?);"
+					+ "DELETE FROM coupon WHERE ID IN (SELECT ID FROM coupon WHERE END_DATE < ?";
 
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, DateUtils.getCurrentDate());
@@ -525,18 +536,18 @@ public class CouponDao implements ICouponDao {
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException( e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, deleteExpiredCoupons(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, deleteExpiredCoupons(); FAILED");
 		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
 	}
-	
-		
+
 	@Override
 	public void purchaseCoupon(long customerId, long couponId) throws ApplicationException {
-		
+
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
 
@@ -553,18 +564,18 @@ public class CouponDao implements ICouponDao {
 
 			preparedStatement.setLong(1, customerId);
 			preparedStatement.setLong(2, couponId);
-			
+
 			preparedStatement.executeUpdate();
-			
+
 		}
 
 		catch (SQLException e) {
-			 throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,"Error in CouponDao, purchaseCoupon(); FAILED");
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR, "Error in CouponDao, purchaseCoupon(); FAILED");
 		}
 
 		finally {
 			JdbcUtils.closeResources(connection, preparedStatement);
 		}
-		
+
 	}
 }

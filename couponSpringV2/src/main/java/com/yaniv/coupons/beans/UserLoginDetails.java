@@ -3,7 +3,7 @@ package com.yaniv.coupons.beans;
 import com.yaniv.coupons.enums.UserType;
 
 public class UserLoginDetails {
-	
+
 	private String userEmail;
 	private String userPassword;
 	private UserType userType;
@@ -48,7 +48,5 @@ public class UserLoginDetails {
 		return "UserLoginDetails [userEmail=" + userEmail + ", userPassword=" + userPassword + ", userType=" + userType
 				+ "]";
 	}
-	
-	
-	
+
 }

@@ -1,11 +1,10 @@
 package com.yaniv.coupons.beans;
 
-
 import com.yaniv.coupons.enums.CouponType;
 
 public class Coupon {
-	
-	private long couponId; 
+
+	private long couponId;
 	private String couponTitle;
 	private String startDate;
 	private String endDate;
@@ -15,11 +14,11 @@ public class Coupon {
 	private long couponPrice;
 	private String couponImage;
 	private long companyId;
-	
+
 	public Coupon() {
 		super();
 	}
-	
+
 	public Coupon(String couponTitle, String startDate, String endDate, long amount, CouponType couponType,
 			String couponMessage, long couponPrice, String couponImage) {
 		super();
@@ -48,7 +47,7 @@ public class Coupon {
 	}
 
 	public Coupon(long couponId, String couponTitle, String startDate, String endDate, long amount,
-			CouponType couponType, String couponMessage, long couponPrice, String couponImage,long companyId) {
+			CouponType couponType, String couponMessage, long couponPrice, String couponImage, long companyId) {
 		super();
 		this.couponId = couponId;
 		this.couponTitle = couponTitle;
@@ -61,7 +60,7 @@ public class Coupon {
 		this.couponImage = couponImage;
 		this.companyId = companyId;
 	}
-	
+
 	public Long getCouponId() {
 		return couponId;
 	}
@@ -133,7 +132,7 @@ public class Coupon {
 	public void setCouponImage(String couponImage) {
 		this.couponImage = couponImage;
 	}
-	
+
 	public Long getCompanyId() {
 		return companyId;
 	}
@@ -145,7 +144,8 @@ public class Coupon {
 	@Override
 	public String toString() {
 		return "\n [Coupon id=" + couponId + ", Coupon title=" + couponTitle + ", Start date=" + startDate
-				+ ", End date=" + endDate + ", Amount=" + amount + ", Coupon type=" + couponType.toString() + ", Coupon message="
-				+ couponMessage + ", Coupon price=" + couponPrice + ", Coupon image=" + couponImage + "]";
+				+ ", End date=" + endDate + ", Amount=" + amount + ", Coupon type=" + couponType.toString()
+				+ ", Coupon message=" + couponMessage + ", Coupon price=" + couponPrice + ", Coupon image="
+				+ couponImage + "]";
 	}
 }

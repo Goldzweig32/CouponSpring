@@ -11,7 +11,8 @@ import com.yaniv.coupons.beans.ErrorBeans;
 public class ExceptionsHandler {
 
 	@ExceptionHandler(ApplicationException.class)
-	public ErrorBeans handleApplicationException(HttpServletResponse response,ApplicationException applicationException) {
+	public ErrorBeans handleApplicationException(HttpServletResponse response,
+			ApplicationException applicationException) {
 
 		int errorCode = applicationException.getErrorType().getErrorCode();
 		String internalMessage = applicationException.getMessage();
@@ -23,8 +24,8 @@ public class ExceptionsHandler {
 		return errorBeans;
 
 	}
-	
-	@ExceptionHandler({Exception.class,Error.class})
+
+	@ExceptionHandler({ Exception.class, Error.class })
 	public ErrorBeans handleException(HttpServletResponse response, Throwable exception) {
 		int errorCode = 601;
 		String internalMessage = exception.getMessage();

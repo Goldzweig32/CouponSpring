@@ -1,10 +1,9 @@
 package com.yaniv.coupons.beans;
 
-
 import com.yaniv.coupons.enums.CompanyStatus;
 
 public class Company {
-	
+
 	private long companyId;
 	private String companyName;
 	private String companyPassword;
@@ -15,7 +14,7 @@ public class Company {
 		super();
 	}
 
-	public Company(String companyName, String companyPassword, String companyEmail,CompanyStatus companyStatus) {
+	public Company(String companyName, String companyPassword, String companyEmail, CompanyStatus companyStatus) {
 		super();
 		this.companyName = companyName;
 		this.companyPassword = companyPassword;
@@ -23,7 +22,8 @@ public class Company {
 		this.companyStatus = companyStatus;
 	}
 
-	public Company(long id, String companyName, String companyPassword, String companyEmail, CompanyStatus companyStatus) {
+	public Company(long id, String companyName, String companyPassword, String companyEmail,
+			CompanyStatus companyStatus) {
 		super();
 		this.companyId = id;
 		this.companyName = companyName;
@@ -74,7 +74,7 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "\n [Company id : " + companyId + ", Company name : " + companyName + ", Company password : " + companyPassword
-				+ ", Company email : " + companyEmail + "]";
+		return "\n [Company id : " + companyId + ", Company name : " + companyName + ", Company password : "
+				+ companyPassword + ", Company email : " + companyEmail + "]";
 	}
 }

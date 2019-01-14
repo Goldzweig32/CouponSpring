@@ -8,18 +8,18 @@ import com.yaniv.coupons.exceptions.ApplicationException;
 
 public class LoginUtils {
 
-		public static boolean isLoginValid(UserLoginDetails userLoginDetails) throws ApplicationException {
+	public static boolean isLoginValid(UserLoginDetails userLoginDetails) throws ApplicationException {
 
-			if (userLoginDetails.getUserType() == UserType.COMPANY) {	
-				CompanyController companyController = new CompanyController();
-				companyController.checkLogin(userLoginDetails.getUserEmail(), userLoginDetails.getUserPassword());
-				
-				return true;
-				
-			}else {
-				CustomerController customerController = new CustomerController();
-				customerController.checkLogin(userLoginDetails.getUserEmail(), userLoginDetails.getUserPassword());
-				return true;
-			}
+		if (userLoginDetails.getUserType() == UserType.COMPANY) {
+			CompanyController companyController = new CompanyController();
+			companyController.checkLogin(userLoginDetails.getUserEmail(), userLoginDetails.getUserPassword());
+
+			return true;
+
+		} else {
+			CustomerController customerController = new CustomerController();
+			customerController.checkLogin(userLoginDetails.getUserEmail(), userLoginDetails.getUserPassword());
+			return true;
 		}
+	}
 }

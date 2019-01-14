@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JdbcUtils {
-static {
-		
+	static {
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -17,7 +17,9 @@ static {
 	}
 
 	public static Connection getConnection() throws SQLException {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/coupons?autoReconnect=true&useSSL=false&serverTimezone=UTC", "root", "Yaniv12345");
+		Connection connection = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/coupons?autoReconnect=true&useSSL=false&serverTimezone=UTC", "root",
+				"Yaniv12345");
 		return connection;
 	}
 
@@ -50,6 +52,5 @@ static {
 		}
 
 	}
-
 
 }

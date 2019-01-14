@@ -4,25 +4,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public enum UserType {
-	COMPANY("company"),
-	CUSTOMER("customer");
- 
-private final String userType;       
+	COMPANY("company"), CUSTOMER("customer");
 
-    private UserType(String userType) {
-    	this.userType = userType;
-    }
+	private final String userType;
 
-    public boolean equalsName(String otherUserType) {
-        // (otherName == null) check is not needed because name.equals(null) returns false 
-        return userType.equals(otherUserType);
-    }
-    
-    public String getUserType() {
+	private UserType(String userType) {
+		this.userType = userType;
+	}
+
+	public boolean equalsName(String otherUserType) {
+		// (otherName == null) check is not needed because name.equals(null) returns
+		// false
+		return userType.equals(otherUserType);
+	}
+
+	public String getUserType() {
 		return userType;
 	}
 
 	public String toString() {
-       return this.userType;
-    }
+		return this.userType;
+	}
 }

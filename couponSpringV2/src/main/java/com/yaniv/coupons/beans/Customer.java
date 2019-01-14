@@ -1,26 +1,25 @@
 package com.yaniv.coupons.beans;
 
-
 public class Customer {
 	private long customerId;
 	private String customerName;
 	private String customerPassword;
 	private String customerEmail;
-	
+
 	public Customer() {
 		super();
 	}
-	
+
 	public Customer(String customerName, String customerPassword, String customerEmail) {
 		this.customerName = customerName;
 		this.customerPassword = customerPassword;
 		this.customerEmail = customerEmail;
 	}
-	
-	public Customer(long customerId, String customerName, String customerPassword,String customerEmail) {
-		this(customerName,customerPassword,customerEmail);
+
+	public Customer(long customerId, String customerName, String customerPassword, String customerEmail) {
+		this(customerName, customerPassword, customerEmail);
 		this.customerId = customerId;
-		
+
 	}
 
 	public long getCustomerId() {
@@ -47,7 +46,6 @@ public class Customer {
 		this.customerPassword = customerPassword;
 	}
 
-	
 	public String getCustomerEmail() {
 		return customerEmail;
 	}
@@ -58,9 +56,8 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "\n [Customer id= " + customerId + "Customer email= " + customerEmail + ", Customer name= " + customerName + ", Customer password= "
-		+ customerPassword + "]";
+		return "\n [Customer id= " + customerId + "Customer email= " + customerEmail + ", Customer name= "
+				+ customerName + ", Customer password= " + customerPassword + "]";
 	}
-	
-	
+
 }

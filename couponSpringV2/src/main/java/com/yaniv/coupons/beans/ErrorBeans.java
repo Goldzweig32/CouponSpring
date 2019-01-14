@@ -1,16 +1,15 @@
 package com.yaniv.coupons.beans;
 
-
 public class ErrorBeans {
-	
+
 	private int errorCode;
 	private String internalMessage;
 	private String errorMessage;
-	
+
 	public ErrorBeans() {
 		super();
 	}
-	
+
 	public ErrorBeans(int errorCode, String internalMessage, String errorMessage) {
 		this.errorCode = errorCode;
 		this.internalMessage = internalMessage;
@@ -40,7 +39,5 @@ public class ErrorBeans {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-	
-	
-	
+
 }

@@ -4,27 +4,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public enum CouponType {
-		VACATION ("vacation"),
-		FOOD("food"),
-		ELECTRICITY("electricity"),
-		SPORTS("sports"),
-		RESTURANTS("resturants"),
-		HEALTH("health"),
-		CAMPING("camping"),
-		TRAVELLING("travelling");
-	 
-	private final String couponType;       
+	VACATION("vacation"), FOOD("food"), ELECTRICITY("electricity"), SPORTS("sports"), RESTURANTS("resturants"), HEALTH(
+			"health"), CAMPING("camping"), TRAVELLING("travelling");
 
-	    private CouponType(String couponType) {
-	    	this.couponType = couponType;
-	    }
+	private final String couponType;
 
-	    public boolean equalsName(String otherCouponType) {
-	        // (otherName == null) check is not needed because name.equals(null) returns false 
-	        return couponType.equals(otherCouponType);
-	    }
+	private CouponType(String couponType) {
+		this.couponType = couponType;
+	}
 
-	    public String toString() {
-	       return this.couponType;
-	    }
+	public boolean equalsName(String otherCouponType) {
+		// (otherName == null) check is not needed because name.equals(null) returns
+		// false
+		return couponType.equals(otherCouponType);
+	}
+
+	public String toString() {
+		return this.couponType;
+	}
 }

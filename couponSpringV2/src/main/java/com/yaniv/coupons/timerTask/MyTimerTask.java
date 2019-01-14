@@ -8,19 +8,20 @@ import com.yaniv.coupons.exceptions.ApplicationException;
 
 public class MyTimerTask extends TimerTask {
 	private ICouponDao couponDao;
-	
+
 	public MyTimerTask() {
 		super();
 		this.couponDao = new CouponDao();
 	}
 
 	@Override
-	public void run() {		
+	public void run() {
 		try {
 			couponDao.deleteExpiredCoupons();
 		} catch (ApplicationException e) {
 			e.printStackTrace();
-		};		
+		}
+		;
 	}
 
 }

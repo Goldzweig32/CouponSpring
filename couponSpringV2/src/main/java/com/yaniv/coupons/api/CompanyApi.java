@@ -22,44 +22,45 @@ import com.yaniv.coupons.beans.UserId;
 import com.yaniv.coupons.controller.CompanyController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/companies")
 public class CompanyApi {
-	
+
 	@Autowired
 	private CompanyController companyController;
-		
+
 	@PostMapping
-	public Response registerCompany(HttpServletResponse response,@RequestBody Company company)throws ApplicationException{
+	public Response registerCompany(HttpServletResponse response, @RequestBody Company company)
+			throws ApplicationException {
 		long companyId = this.companyController.registerCompany(company);
-		
+
 		Cookie cookie = new Cookie("login", Long.toString(companyId));
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		UserId userId = new UserId(companyId);
 		return Response.status(200).entity(userId).build();
-		
+
 	}
-	
-	@DeleteMapping
-	public void deactivateCompany(@PathVariable("companyId") long companyId) throws ApplicationException{
+
+	@DeleteMapping("/{companyId}")
+	public void deactivateCompany(@PathVariable("companyId") long companyId) throws ApplicationException {
 		this.companyController.deactivateCompany(companyId);
 	}
-	
+
 	@PutMapping
-	public void updateCompany(@RequestBody Company company) throws ApplicationException{
+	public void updateCompany(@RequestBody Company company) throws ApplicationException {
 		this.companyController.updateCompany(company);
 	}
-	
+
 	@GetMapping
-	public List<Company> getCompanies() throws ApplicationException{
+	public List<Company> getCompanies() throws ApplicationException {
 		return this.companyController.getCompanies();
 	}
-	
+
 	@GetMapping
 	@RequestMapping("/showCompany/{companyId}")
-	public Company getCompany(@PathVariable ("companyId") long companyId) throws ApplicationException{
+	public Company getCompany(@PathVariable("companyId") long companyId) throws ApplicationException {
 		return this.companyController.getCompany(companyId);
 	}
 }
