@@ -101,7 +101,7 @@ public class CouponController {
 
 	public void purchaseCoupon(long customerId, long couponId) throws ApplicationException {
 		Coupon coupon = couponDao.getCoupon(couponId);
-		int couponAmount = coupon.getAmount();
+		long couponAmount = coupon.getAmount();
 		if (couponAmount > 0) {
 			coupon.setAmount(couponAmount-1);
 			couponDao.updateCoupon(coupon);

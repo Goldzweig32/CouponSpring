@@ -26,12 +26,13 @@ public class LoginFilter implements Filter {
 		//if not, this methods will return null.
 		HttpSession session=req.getSession(false);
 		String pageRequested=req.getRequestURL().toString();
-		if (session!=null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register")) {
+		String pageMethod = req.getMethod();
+		if (session!=null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register") || pageMethod.equals("OPTIONS")) {
 			chain.doFilter(request, response);
 			return;
 		}	
 //		if the session is null, we set the status of the request to unauthorized
-		res.setStatus(401);
+//		res.setStatus(401);
 	}
 
 	public void init(FilterConfig config) throws ServletException {}

@@ -40,10 +40,10 @@ public class CouponDao implements ICouponDao {
 			preparedStatement.setString(1, coupon.getCouponTitle());
 			preparedStatement.setString(2, coupon.getStartDate());
 			preparedStatement.setString(3, coupon.getEndDate());
-			preparedStatement.setInt(4, coupon.getAmount());
+			preparedStatement.setLong(4, coupon.getAmount());
 			preparedStatement.setString(5, coupon.getCouponType());
 			preparedStatement.setString(6, coupon.getCouponMessage());
-			preparedStatement.setDouble(7, coupon.getCouponPrice());
+			preparedStatement.setLong(7, coupon.getCouponPrice());
 			preparedStatement.setString(8, coupon.getCouponImage());
 			preparedStatement.setLong(9, coupon.getCompanyId());
 			
@@ -103,9 +103,9 @@ public class CouponDao implements ICouponDao {
 		coupon.setCouponTitle(resultSet.getString("COUPON_TITLE"));
 		coupon.setStartDate(resultSet.getString("START_DATE"));
 		coupon.setEndDate(resultSet.getString("END_DATE"));
-		coupon.setAmount(resultSet.getInt("AMOUNT"));
+		coupon.setAmount(resultSet.getLong("AMOUNT"));
 		coupon.setCouponType(resultSet.getString("COUPON_TYPE"));
-		coupon.setCouponPrice(resultSet.getDouble("COUPON_PRICE"));
+		coupon.setCouponPrice(resultSet.getLong("COUPON_PRICE"));
 		coupon.setCouponMessage(resultSet.getString("COUPON_MESSAGE"));
 		coupon.setCouponImage(resultSet.getString("COUPON_IMAGE"));
 		coupon.setCompanyId(resultSet.getLong("COMPANY_ID"));
@@ -226,10 +226,10 @@ public class CouponDao implements ICouponDao {
 			preparedStatement.setString(1, coupon.getCouponTitle());
 			preparedStatement.setString(2, coupon.getStartDate());
 			preparedStatement.setString(3, coupon.getEndDate());
-			preparedStatement.setInt(4, coupon.getAmount());
+			preparedStatement.setLong(4, coupon.getAmount());
 			preparedStatement.setString(5, coupon.getCouponType());
 			preparedStatement.setString(6, coupon.getCouponMessage());
-			preparedStatement.setDouble(7, coupon.getCouponPrice());
+			preparedStatement.setLong(7, coupon.getCouponPrice());
 			preparedStatement.setString(8, coupon.getCouponImage());
 			preparedStatement.setLong(9, coupon.getCouponId());
 

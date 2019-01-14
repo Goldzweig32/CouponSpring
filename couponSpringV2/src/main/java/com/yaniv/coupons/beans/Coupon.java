@@ -9,10 +9,10 @@ public class Coupon {
 	private String couponTitle;
 	private String startDate;
 	private String endDate;
-	private int amount;
+	private long amount;
 	private CouponType couponType;
 	private String couponMessage;
-	private double couponPrice;
+	private long couponPrice;
 	private String couponImage;
 	private long companyId;
 	
@@ -20,8 +20,8 @@ public class Coupon {
 		super();
 	}
 	
-	public Coupon(String couponTitle, String startDate, String endDate, int amount, CouponType couponType,
-			String couponMessage, double couponPrice, String couponImage) {
+	public Coupon(String couponTitle, String startDate, String endDate, long amount, CouponType couponType,
+			String couponMessage, long couponPrice, String couponImage) {
 		super();
 		this.couponTitle = couponTitle;
 		this.startDate = startDate;
@@ -33,8 +33,8 @@ public class Coupon {
 		this.couponImage = couponImage;
 	}
 
-	public Coupon(long couponId, String couponTitle, String startDate, String endDate, int amount,
-			CouponType couponType, String couponMessage, double couponPrice, String couponImage) {
+	public Coupon(long couponId, String couponTitle, String startDate, String endDate, long amount,
+			CouponType couponType, String couponMessage, long couponPrice, String couponImage) {
 		super();
 		this.couponId = couponId;
 		this.couponTitle = couponTitle;
@@ -47,8 +47,8 @@ public class Coupon {
 		this.couponImage = couponImage;
 	}
 
-	public Coupon(long couponId, String couponTitle, String startDate, String endDate, int amount,
-			CouponType couponType, String couponMessage, double couponPrice, String couponImage,long companyId) {
+	public Coupon(long couponId, String couponTitle, String startDate, String endDate, long amount,
+			CouponType couponType, String couponMessage, long couponPrice, String couponImage,long companyId) {
 		super();
 		this.couponId = couponId;
 		this.couponTitle = couponTitle;
@@ -94,11 +94,11 @@ public class Coupon {
 		this.endDate = endDate;
 	}
 
-	public int getAmount() {
+	public long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(long amount) {
 		this.amount = amount;
 	}
 
@@ -118,11 +118,11 @@ public class Coupon {
 		this.couponMessage = couponMessage;
 	}
 
-	public double getCouponPrice() {
+	public long getCouponPrice() {
 		return couponPrice;
 	}
 
-	public void setCouponPrice(double couponPrice) {
+	public void setCouponPrice(long couponPrice) {
 		this.couponPrice = couponPrice;
 	}
 

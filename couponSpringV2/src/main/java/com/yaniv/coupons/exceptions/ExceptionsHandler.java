@@ -1,13 +1,9 @@
 package com.yaniv.coupons.exceptions;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.yaniv.coupons.beans.ErrorBeans;
 
 @ResponseBody
