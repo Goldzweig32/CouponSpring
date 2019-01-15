@@ -93,7 +93,7 @@ public class CouponApi {
 	
 	@GetMapping
 	@RequestMapping("/showCouponsByCompany/{companyId}")
-	public List<Coupon> getCouponsByCompany(@RequestParam("companyId") long companyId)
+	public List<Coupon> getCouponsByCompany(@PathVariable("companyId") long companyId)
 			throws ApplicationException {
 		return this.couponController.getCouponsByCompany(companyId);
 	}
