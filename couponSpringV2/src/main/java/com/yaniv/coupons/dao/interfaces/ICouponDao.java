@@ -27,6 +27,8 @@ public interface ICouponDao {
 	public List<Coupon> getCouponUpToDate(String couponEndDate) throws ApplicationException;
 
 	public List<Coupon> getCouponsByCustomerId(long customerId) throws ApplicationException;
+	
+	public List<Coupon> getCouponsByCompany(long companyId) throws ApplicationException;
 
 	public boolean isCouponExistByTitle(String couponTitle) throws ApplicationException;
 

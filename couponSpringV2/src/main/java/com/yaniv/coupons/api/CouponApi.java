@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yaniv.coupons.beans.Coupon;
@@ -88,5 +89,12 @@ public class CouponApi {
 	public List<Coupon> getCouponsByCustomerId(@PathVariable("customerId") long customerId)
 			throws ApplicationException {
 		return this.couponController.getCouponsByCustomerId(customerId);
+	}
+	
+	@GetMapping
+	@RequestMapping("/showCouponsByCompany/{companyId}")
+	public List<Coupon> getCouponsByCompany(@RequestParam("companyId") long companyId)
+			throws ApplicationException {
+		return this.couponController.getCouponsByCompany(companyId);
 	}
 }

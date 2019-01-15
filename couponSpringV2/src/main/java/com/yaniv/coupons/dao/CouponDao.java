@@ -442,6 +442,48 @@ public class CouponDao implements ICouponDao {
 		}
 		return coupons;
 	}
+	
+	public List<Coupon> getCouponsByCompany(long companyId) throws ApplicationException {
+
+		java.sql.PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Coupon coupon = null;
+
+		List<Coupon> coupons = new ArrayList<Coupon>();
+
+		try {
+			// Getting a connection to the DB
+			connection = JdbcUtils.getConnection();
+
+			// Creating a string which will contain the query
+			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
+			// ATTACK
+			String sql = "SELECT ID,COUPON_TITLE,START_DATE,END_DATE,AMOUNT,COUPON_TYPE,COUPON_MESSAGE,COUPON_PRICE,COUPON_IMAGE,COMPANY_ID "
+					+ " FROM coupon"
+					+ " WHERE COMPANY_ID = ?";
+
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, companyId);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				coupon = extractCouponFromResultSet(resultSet);
+				coupons.add(coupon);
+			}
+		}
+
+		catch (SQLException e) {
+			throw new ApplicationException(e, ErrorType.SYSTEM_ERROR,
+					"Error in CouponDao, getCouponsByCustomerId(); FAILED");
+		}
+
+		finally {
+			JdbcUtils.closeResources(connection, preparedStatement, resultSet);
+		}
+		return coupons;
+	}
+
 
 	@Override
 	public boolean isCouponExistByTitle(String couponTitle) throws ApplicationException {
@@ -477,6 +519,8 @@ public class CouponDao implements ICouponDao {
 
 		return false;
 	}
+	
+	
 
 	@Override
 	public boolean isCouponExist(long couponId) throws ApplicationException {

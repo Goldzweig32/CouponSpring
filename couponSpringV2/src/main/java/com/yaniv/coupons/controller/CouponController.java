@@ -88,6 +88,11 @@ public class CouponController {
 		List<Coupon> coupons = couponDao.getCouponsByCustomerId(customerId);
 		return coupons;
 	}
+	
+	public List<Coupon> getCouponsByCompany(long companyId) throws ApplicationException {
+		List<Coupon> coupons = couponDao.getCouponsByCompany(companyId);
+		return coupons;
+	}
 
 	private void validateCreateCoupon(Coupon coupon) throws ApplicationException {
 		// We check if the coupon's name is already exist in the DB

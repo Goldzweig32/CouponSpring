@@ -42,7 +42,8 @@ public class CustomerApi {
 		return Response.status(200).entity(new Long(customerId)).build();
 	}
 
-	@DeleteMapping("/{customerId}")
+	@DeleteMapping
+	@RequestMapping("/{customerId}")
 	public void deleteCustomer(@PathVariable("customerId") long customerId) throws ApplicationException {
 		this.customerController.deleteCustomer(customerId);
 	}
