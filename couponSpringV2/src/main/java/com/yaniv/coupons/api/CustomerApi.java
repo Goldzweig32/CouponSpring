@@ -3,6 +3,7 @@ package com.yaniv.coupons.api;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yaniv.coupons.beans.Customer;
+import com.yaniv.coupons.beans.UserId;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.controller.CustomerController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
@@ -31,15 +34,18 @@ public class CustomerApi {
 	private CustomerController customerController;
 
 	@PostMapping
-	public Response registerCustomer(HttpServletResponse response, @RequestBody Customer customer)
+	public UserId registerCustomer(HttpServletRequest request,HttpServletResponse response, @RequestBody UserLoginDetails userLoginDetails)
 			throws ApplicationException {
 		// this.customerController.createCustomer(customer);
-		long customerId = this.customerController.registerCustomer(customer);
+		long customerId = this.customerController.registerCustomer(userLoginDetails);
 		Cookie cookie = new Cookie("login", Long.toString(customerId));
 		cookie.setPath("/");
 		response.addCookie(cookie);
-
-		return Response.status(200).entity(new Long(customerId)).build();
+		UserId userId = new UserId(customerId);
+		response.setStatus(200);
+		request.getSession();
+		return userId;
+		
 	}
 
 	@DeleteMapping

@@ -2,11 +2,12 @@ package com.yaniv.coupons.dao.interfaces;
 
 import java.util.List;
 import com.yaniv.coupons.beans.Company;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
 public interface ICompanyDao {
 
-	public long registerCompany(Company company) throws ApplicationException;
+	public long registerCompany(UserLoginDetails userLoginDetails) throws ApplicationException;
 
 	public Company getCompany(long companyId) throws ApplicationException;
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yaniv.coupons.beans.Company;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.dao.interfaces.ICompanyDao;
 import com.yaniv.coupons.enums.ErrorType;
 import com.yaniv.coupons.exceptions.ApplicationException;
@@ -22,12 +23,12 @@ public class CompanyController {
 	// this.companyDao = new CompanyDao();
 	// }
 
-	public long registerCompany(Company company) throws ApplicationException {
+	public long registerCompany(UserLoginDetails userLoginDetails) throws ApplicationException {
 		// We validate the creation of a new coupon
-		validateRegisterCompany(company);
+		//validateRegisterCompany(userLoginDetails);
 
 		// If we didn't catch any exception, we call the 'createCoupon' method.
-		return this.companyDao.registerCompany(company);
+		return this.companyDao.registerCompany(userLoginDetails);
 
 	}
 
@@ -88,25 +89,25 @@ public class CompanyController {
 		return id;
 	}
 
-	private void validateRegisterCompany(Company company) throws ApplicationException {
+	private void validateRegisterCompany(UserLoginDetails userLoginDetails) throws ApplicationException {
 
 		// We check if the email is valid
-		if (!ValidationUtils.isEmailValid(company.getCompanyEmail())) {
+		if (!ValidationUtils.isEmailValid(userLoginDetails.getUserEmail())) {
 			throw new ApplicationException(ErrorType.INVALID_EMAIL_OR_PASSWORD,
 					DateUtils.getCurrentDateAndTime() + " Create company has failed."
 							+ "\nThe user attempted to create a new company using an invaild email or password.");
 		}
 
 		// We check if the coupon's name is already exist in the DB
-		if (this.companyDao.isCompanyExistByEmail(company.getCompanyEmail())) {
+		if (this.companyDao.isCompanyExistByEmail(userLoginDetails.getUserEmail())) {
 			throw new ApplicationException(ErrorType.EMAIL_IS_ALREADY_EXISTS,
 					DateUtils.getCurrentDateAndTime() + " Create company has failed."
 							+ "\nThe user attempted to create a new company using an email that is already exists."
-							+ "\nCompany Email =" + company.getCompanyEmail());
+							+ "\nCompany Email =" + userLoginDetails.getUserEmail());
 		}
 
 		// We check if the password is valid
-		if (!ValidationUtils.isPasswordValid(company.getCompanyPassword())) {
+		if (!ValidationUtils.isPasswordValid(userLoginDetails.getUserPassword())) {
 			throw new ApplicationException(ErrorType.INVALID_EMAIL_OR_PASSWORD,
 					DateUtils.getCurrentDateAndTime() + " Create company has failed."
 							+ "\nThe user attempted to create a new company using an invaild email or password.");

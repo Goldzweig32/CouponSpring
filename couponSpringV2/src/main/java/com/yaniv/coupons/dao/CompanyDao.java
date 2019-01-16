@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yaniv.coupons.beans.Company;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.dao.interfaces.ICompanyDao;
 import com.yaniv.coupons.enums.ErrorType;
 import com.yaniv.coupons.exceptions.ApplicationException;
@@ -21,7 +22,7 @@ public class CompanyDao implements ICompanyDao {
 	// final static Logger logger = Logger.getLogger(CompanyDao.class);
 
 	@Override
-	public long registerCompany(Company company) throws ApplicationException {
+	public long registerCompany(UserLoginDetails userLoginDetails) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -29,7 +30,7 @@ public class CompanyDao implements ICompanyDao {
 		try {
 			// Getting a connection to the DB
 			connection = JdbcUtils.getConnection();
-
+			String active = "active";
 			// Creating a string which will contain the query
 			// PAY ATTENTION - BY USING THE ? (Question marks) WE PREVENT AN SQL INJECTION
 			// ATTACK
@@ -37,10 +38,10 @@ public class CompanyDao implements ICompanyDao {
 
 			preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
-			preparedStatement.setString(1, company.getCompanyName());
-			preparedStatement.setString(2, company.getCompanyPassword());
-			preparedStatement.setString(3, company.getCompanyEmail());
-			preparedStatement.setString(4, company.getCompanyStatus());
+			preparedStatement.setString(1, "change me!");
+			preparedStatement.setString(2, userLoginDetails.getUserPassword());
+			preparedStatement.setString(3, userLoginDetails.getUserEmail());
+			preparedStatement.setString(4, active);
 
 			preparedStatement.executeUpdate();
 

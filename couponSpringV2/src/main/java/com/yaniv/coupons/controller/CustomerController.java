@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.yaniv.coupons.beans.Customer;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.dao.interfaces.ICouponDao;
 import com.yaniv.coupons.dao.interfaces.ICustomerDao;
 import com.yaniv.coupons.enums.ErrorType;
@@ -26,12 +27,12 @@ public class CustomerController {
 	 * this.couponDao = new CouponDao(); }
 	 */
 
-	public long registerCustomer(Customer customer) throws ApplicationException {
+	public long registerCustomer(UserLoginDetails userLoginDetails) throws ApplicationException {
 		// We validate the creation of a new coupon
-		validateRegisterCustomer(customer);
+		//validateRegisterCustomer(customer);
 
 		// If we didn't catch any exception, we call the 'createCoupon' method.
-		return this.customerDao.registerCustomer(customer);
+		return this.customerDao.registerCustomer(userLoginDetails);
 	}
 
 	public Customer getCustomerByCustomerId(long customerId) throws ApplicationException {

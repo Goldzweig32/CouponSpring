@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yaniv.coupons.beans.Customer;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.dao.interfaces.ICustomerDao;
 import com.yaniv.coupons.enums.ErrorType;
 import com.yaniv.coupons.exceptions.ApplicationException;
@@ -18,7 +19,7 @@ import com.yaniv.coupons.utils.JdbcUtils;
 @Repository
 public class CustomerDao implements ICustomerDao {
 	@Override
-	public long registerCustomer(Customer customer) throws ApplicationException {
+	public long registerCustomer(UserLoginDetails userLoginDetails) throws ApplicationException {
 
 		java.sql.PreparedStatement preparedStatement = null;
 		Connection connection = null;
@@ -34,9 +35,9 @@ public class CustomerDao implements ICustomerDao {
 
 			preparedStatement = connection.prepareStatement(sql);
 
-			preparedStatement.setString(1, customer.getCustomerName());
-			preparedStatement.setString(2, customer.getCustomerPassword());
-			preparedStatement.setString(2, customer.getCustomerEmail());
+			preparedStatement.setString(1, "change me!");
+			preparedStatement.setString(2, userLoginDetails.getUserPassword());
+			preparedStatement.setString(3, userLoginDetails.getUserEmail());
 
 			preparedStatement.executeUpdate();
 

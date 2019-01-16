@@ -3,6 +3,7 @@ package com.yaniv.coupons.api;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Response;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yaniv.coupons.beans.Company;
 import com.yaniv.coupons.beans.UserId;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.controller.CompanyController;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
@@ -31,15 +33,17 @@ public class CompanyApi {
 	private CompanyController companyController;
 
 	@PostMapping
-	public Response registerCompany(HttpServletResponse response, @RequestBody Company company)
+	public UserId registerCompany(HttpServletRequest request,HttpServletResponse response, @RequestBody UserLoginDetails userLoginDetails)
 			throws ApplicationException {
-		long companyId = this.companyController.registerCompany(company);
+		long companyId = this.companyController.registerCompany(userLoginDetails);
 
 		Cookie cookie = new Cookie("login", Long.toString(companyId));
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		UserId userId = new UserId(companyId);
-		return Response.status(200).entity(userId).build();
+		response.setStatus(200);
+		request.getSession();
+		return userId;
 
 	}
 

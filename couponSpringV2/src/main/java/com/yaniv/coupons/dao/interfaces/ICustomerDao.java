@@ -3,11 +3,12 @@ package com.yaniv.coupons.dao.interfaces;
 import java.util.List;
 
 import com.yaniv.coupons.beans.Customer;
+import com.yaniv.coupons.beans.UserLoginDetails;
 import com.yaniv.coupons.exceptions.ApplicationException;
 
 public interface ICustomerDao {
 
-	public long registerCustomer(Customer customer) throws ApplicationException;
+	public long registerCustomer(UserLoginDetails userLoginDetails) throws ApplicationException;
 
 	public Customer getCustomer(long customerId) throws ApplicationException;
 
