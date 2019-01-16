@@ -18,6 +18,7 @@ import com.yaniv.coupons.utils.JdbcUtils;
 
 @Repository
 public class CustomerDao implements ICustomerDao {
+	
 	@Override
 	public long registerCustomer(UserLoginDetails userLoginDetails) throws ApplicationException {
 
@@ -33,7 +34,7 @@ public class CustomerDao implements ICustomerDao {
 			// ATTACK
 			String sql = "insert into customer (CUSTOMER_NAME, PASSWORD , EMAIL) values (?,?,?)";
 
-			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, "change me!");
 			preparedStatement.setString(2, userLoginDetails.getUserPassword());
