@@ -93,9 +93,9 @@ public class CustomerDao implements ICustomerDao {
 	private Customer extractCustomerFromResultSet(ResultSet resultSet) throws SQLException {
 		Customer customer = new Customer();
 		customer.setCustomerId(resultSet.getLong("ID"));
-		customer.setCustomerName(resultSet.getString("COMPANY_NAME"));
+		customer.setCustomerName(resultSet.getString("CUSTOMER_NAME"));
 		customer.setCustomerPassword(resultSet.getString("PASSWORD"));
-		customer.setCustomerPassword(resultSet.getString("EMAIL"));
+		customer.setCustomerEmail(resultSet.getString("EMAIL"));
 
 		return customer;
 	}

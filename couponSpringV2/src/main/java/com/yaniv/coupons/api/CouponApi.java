@@ -36,8 +36,8 @@ public class CouponApi {
 	}
 
 	@PostMapping
-	@RequestMapping("/purchaseCoupon/{couponId}")
-	public void purchaseCoupon(HttpServletRequest request, @PathVariable("couponId") long couponId)
+	@RequestMapping("/purchaseCoupon")
+	public void purchaseCoupon(HttpServletRequest request, @RequestBody long couponId)
 			throws ApplicationException {
 		this.couponController.purchaseCoupon(Long.parseLong(ProjectUtils.getCookieValue(request, "login")), couponId);
 	}

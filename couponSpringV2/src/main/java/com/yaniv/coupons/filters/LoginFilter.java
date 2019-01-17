@@ -21,20 +21,19 @@ public class LoginFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 //		HttpServletResponse res = (HttpServletResponse) response;
-		// chain.doFilter(request, response);
-		// return;
-		// checking the existence of session. If session exists, then it returns the
-		// reference of that session object.
-		// if not, this methods will return null.
-		HttpSession session = req.getSession(false);
-		String pageRequested = req.getRequestURL().toString();
-		String pageMethod = req.getMethod();
-		if (session != null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register")
-				|| pageMethod.equals("OPTIONS")) {
-			chain.doFilter(request, response);
-			return;
-		}
-		// if the session is null, we set the status of the request to unauthorized
+		 chain.doFilter(request, response);
+		 return;
+		
+//		HttpSession session = req.getSession(false);
+//		String pageRequested = req.getRequestURL().toString();
+//		String pageMethod = req.getMethod();
+//		if (session != null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register")
+//				|| pageMethod.equals("OPTIONS")) {
+//			chain.doFilter(request, response);
+//			return;
+//		}
+		
+		 // if the session is null, we set the status of the request to unauthorized
 		// res.setStatus(401);
 	}
 
