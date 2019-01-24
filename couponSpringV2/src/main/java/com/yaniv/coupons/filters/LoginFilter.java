@@ -8,6 +8,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,21 +21,32 @@ public class LoginFilter implements Filter {
 			throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest) request;
-//		HttpServletResponse res = (HttpServletResponse) response;
-		 chain.doFilter(request, response);
-		 return;
+		HttpSession session = req.getSession(false);
+		Cookie[] cookies = req.getCookies();
+		String pageRequested = req.getRequestURL().toString();
+		String pageMethod = req.getMethod();
 		
-//		HttpSession session = req.getSession(false);
-//		String pageRequested = req.getRequestURL().toString();
-//		String pageMethod = req.getMethod();
-//		if (session != null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register")
-//				|| pageMethod.equals("OPTIONS")) {
-//			chain.doFilter(request, response);
-//			return;
-//		}
+		if (req.getMethod().equals("OPTIONS")) {
+			chain.doFilter(request, response);
+			return;
+        }
 		
-		 // if the session is null, we set the status of the request to unauthorized
-		// res.setStatus(401);
+		
+		if (session != null || pageRequested.endsWith("/login") || pageRequested.endsWith("/register")) {
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					req.setAttribute(cookie.getName(), cookie.getValue());
+				}
+				
+			}
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		HttpServletResponse res = (HttpServletResponse) response;
+		// if the session is null, we set the status of the request to unauthorized
+		res.setStatus(401);
+		System.out.println("access denied");
 	}
 
 	public void init(FilterConfig config) throws ServletException {

@@ -19,7 +19,7 @@ import com.yaniv.coupons.enums.UserType;
 import com.yaniv.coupons.exceptions.ApplicationException;
 import com.yaniv.coupons.utils.ApplicationContextProvider;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/login")
 public class LoginApi {

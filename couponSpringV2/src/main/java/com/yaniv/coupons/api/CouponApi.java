@@ -22,7 +22,7 @@ import com.yaniv.coupons.enums.CouponType;
 import com.yaniv.coupons.exceptions.ApplicationException;
 import com.yaniv.coupons.utils.ProjectUtils;
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/coupons")
 public class CouponApi {

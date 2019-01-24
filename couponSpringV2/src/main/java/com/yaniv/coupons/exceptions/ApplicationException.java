@@ -2,7 +2,7 @@ package com.yaniv.coupons.exceptions;
 
 import com.yaniv.coupons.enums.ErrorType;
 
-public class ApplicationException extends Exception {
+public class ApplicationException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private ErrorType errorType;
 
