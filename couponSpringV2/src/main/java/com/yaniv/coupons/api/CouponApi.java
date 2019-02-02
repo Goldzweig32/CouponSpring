@@ -45,6 +45,7 @@ public class CouponApi {
 	@DeleteMapping
 	@RequestMapping("/{couponId}")
 	public void deleteCoupon(@PathVariable("couponId") long couponId) throws ApplicationException {
+		System.out.println("try to delete coupon");
 		this.couponController.deleteCoupon(couponId);
 	}
 

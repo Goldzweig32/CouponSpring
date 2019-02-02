@@ -54,7 +54,9 @@ public class CompanyApi {
 	}
 
 	@PutMapping
+	@RequestMapping("/update")
 	public void updateCompany(@RequestBody Company company) throws ApplicationException {
+		System.out.println(company);
 		this.companyController.updateCompany(company);
 	}
 

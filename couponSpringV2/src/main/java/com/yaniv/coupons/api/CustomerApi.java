@@ -55,7 +55,9 @@ public class CustomerApi {
 	}
 
 	@PutMapping
+	@RequestMapping("/update")
 	public void updateCustomer(@RequestBody Customer customer) throws ApplicationException {
+		System.out.println(customer);
 		this.customerController.updateCustomer(customer);
 	}
 
